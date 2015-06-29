@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.app.Activity;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
@@ -14,14 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.towntrot.checkin.httputils.MyCustomFeedManager;
 
+import io.fabric.sdk.android.Fabric;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.FileOutputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends Activity {
     public Context mContext;
@@ -34,6 +41,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/nexa_bold.otf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
 
             filereader read=new filereader();
             String key=read.readfile("tt_key", getApplicationContext());
@@ -51,12 +63,41 @@ public class MainActivity extends Activity {
         login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 v.startAnimation(buttonClick);
-                authentication();
+               if (isInternetOn()) {
+                    authentication();
+                } else {
+                   Toast.makeText(mContext, "Please check your internet connection and try again!", Toast.LENGTH_LONG).show();
+                }
        }
 
         });
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    public final boolean isInternetOn() {
+        ConnectivityManager connec =
+                (ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+
+        if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+            return true;
+
+        } else if (
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED  ) {
+
+            return false;
+        }
+        return false;
     }
 
        public void authentication() {
@@ -91,7 +132,7 @@ public class MainActivity extends Activity {
                } catch (Exception e) {
                    e.printStackTrace();
                    Log.e("applogs", "Exception: " + e.getMessage());
-                   Toast.makeText(mContext, "There was some error sending your response! Please check your internet connection and try again!", Toast.LENGTH_LONG).show();
+                   Toast.makeText(mContext, "Please check your internet connection and try again!", Toast.LENGTH_LONG).show();
                    cancel(true);
                    return null;
                }
@@ -106,7 +147,7 @@ public class MainActivity extends Activity {
                    } catch (Exception e) {
                    }
                    String id=userdetails.getID();
-                   if(id=="0"){
+                   if(id.equals("0")){
                        Toast.makeText(mContext, "Wrong Credentials", Toast.LENGTH_LONG).show();
                        user_email.setText("");
                        user_password.setText("");
@@ -135,12 +176,12 @@ public class MainActivity extends Activity {
                        progDialog.dismiss();
                    } catch (Exception e) {
                    }
-                   Toast.makeText(mContext, "There was some error sending your response! Please check your internet connection and try again!", Toast.LENGTH_LONG).show();
+                   Toast.makeText(mContext, "Please check your internet connection and try again!", Toast.LENGTH_LONG).show();
                }
            }
        }
 
        public String getApiEndpoint() {
-           return "http://192.168.1.176/app/mobile/mv1/";
+           return "http://towntrot.com/mobile/mv1/";
        }
 }

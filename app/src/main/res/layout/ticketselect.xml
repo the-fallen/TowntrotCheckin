@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:padding="9dp"
+        android:textColor="#ffffff"
+        android:textSize="19sp"
+        android:background="#000000"/>
     <TextView android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:padding="10dp"
-        android:text="@string/some_text" android:textSize="20sp" />
-
-
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/some_text"
+        android:textSize="12sp" />
+    <ListView android:id="@+id/listView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    </LinearLayout>
     <Button
         android:id="@+id/findSelected"
+        android:text="VIEW GUEST LIST"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GuestList for selected types" />
-
-    <ListView android:id="@+id/listView1" android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-</LinearLayout>
+        android:layout_marginTop="510dp"
+        android:textSize="19dp"
+        android:layout_height="100dp"
+        android:background="#F05324"
+        android:textColor="#ffffff"
+         />
+</RelativeLayout>

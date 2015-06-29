@@ -6,11 +6,11 @@
     <string name="hello_world">Login towntrot</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
-    <string name="Login">Sign in</string>
-    <string name="title_activity_events">Your Events</string>
+    <string name="Login">SIGN IN</string>
+    <string name="title_activity_events">My Events</string>
     <string name="title_activity_guestlist">Guests</string>
  <string name="some_text">
-     Choose Ticket type(s)
+     choose ticket type(s):
  </string>
 
 </resources>

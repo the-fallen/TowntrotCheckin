@@ -3,9 +3,13 @@
     package="com.towntrot.checkin" >
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:windowSoftInputMode="adjustPan"
         android:allowBackup="true"
+        android:logo="@drawable/logo"
+        android:name=".CheckinApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name">
         <activity
@@ -27,6 +31,9 @@
         android:label="@string/title_activity_guestlist"
         android:theme="@style/AppTheme">
     </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8319df011c4a66c84f7ba1237a5537d734723473" />
     </application>
 
 </manifest>

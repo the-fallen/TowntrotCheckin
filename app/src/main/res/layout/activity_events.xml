@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#222222"
     >
     <TableLayout
         android:layout_width="fill_parent"
@@ -22,6 +23,20 @@
 
     <LinearLayout
         android:id="@+id/textLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        />
+
+    <LinearLayout
+        android:id="@+id/textLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        />
+
+    <LinearLayout
+        android:id="@+id/textLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"

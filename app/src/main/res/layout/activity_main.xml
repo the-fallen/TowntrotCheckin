@@ -7,45 +7,53 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    tools:ignore="MissingPrefix"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/textView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="@string/hello_world"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="60dp"
+        android:background="@drawable/logo"/>
 
     <EditText
         android:id="@+id/editText1"
-        android:hint="Email"
+        android:hint="username"
+        android:textColorHint="#999999"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:ems="10" >
-
-        <requestFocus />
+        android:layout_height="40dp"
+        android:layout_marginTop="300dp"
+        android:background="#22000000">
     </EditText>
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:hint="password"
-        android:layout_marginTop="138dp"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:textColorHint="#999999"
+        android:background="#22000000"
+        android:layout_marginTop="350dp"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="24dp"
+        android:textColor="#ffffff"
+        android:textSize="22dp"
         android:background="@drawable/button"
         android:text="@string/Login" />
 </RelativeLayout>

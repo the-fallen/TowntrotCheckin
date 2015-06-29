@@ -87,7 +87,7 @@ public class CustomAdapter extends BaseAdapter implements OnClickListener {
 
         if(data.size()<=0)
         {
-            holder.text.setText("No Data");
+            holder.text.setText("This list is empty!");
 
         }
         else
@@ -101,22 +101,26 @@ public class CustomAdapter extends BaseAdapter implements OnClickListener {
             holder.text.setText( tempValues.getCompanyName() );
             ImageView imageView1=(ImageView)vi.findViewById(R.id.imageView1);
             ImageView imageView2=(ImageView)vi.findViewById(R.id.imageView2);
+            ImageView imageViewi=(ImageView)vi.findViewById(R.id.imageViewi);
             if (i==0){
                 imageView1.setImageResource(R.drawable.checked_in);
                 imageView2.setImageResource(R.drawable.checked_out);
             }
             else if (i==1){
-                imageView1.setImageResource(R.drawable.checked_in);
+                imageView1.setImageResource(R.drawable.booked);
                 imageView2.setImageResource(R.drawable.checked_out);
             }
             else if (i==2){
-                imageView1.setImageResource(R.drawable.checked_in);
-                imageView2.setImageResource(R.drawable.checked_out);
+                imageView1.setImageResource(R.drawable.booked);
+                imageView2.setImageResource(R.drawable.checked_in);
             }
+            imageViewi.setImageResource(R.drawable.infoicon);
             TextView textview=(TextView)vi.findViewById(R.id.text2);
-            textview.setText(position+1+".");
+            textview.setText(position+1+" ");
+            imageViewi.setOnClickListener(new OnItemClickListener( position+0.1f ));
             imageView1.setOnClickListener(new OnItemClickListener( position ));
             imageView2.setOnClickListener(new OnItemClickListener(-(position+1) ));
+
         }
         return vi;
     }
@@ -128,9 +132,9 @@ public class CustomAdapter extends BaseAdapter implements OnClickListener {
 
     /********* Called when Item click in ListView ************/
     private class OnItemClickListener  implements OnClickListener{
-        private int mPosition;
+        private float mPosition;
 
-        OnItemClickListener(int position){
+        OnItemClickListener(float position){
             mPosition = position;
         }
 
@@ -139,22 +143,23 @@ public class CustomAdapter extends BaseAdapter implements OnClickListener {
             arg0.startAnimation(buttonClick);
             guestlist sct = (guestlist)activity;
             int pageno=ff.getPageno();
-            if(pageno==0){
+            if (mPosition%1!=0)
+                sct.onInfoClick(mPosition-0.1f,pageno);
+            else if(pageno==0){
                 if (mPosition>=0)
-            sct.onItemClick(mPosition,pageno,1);
+            sct.onItemClick(mPosition,pageno,1,ff);
                 else
-            sct.onItemClick(-mPosition-1,pageno,2);}
+            sct.onItemClick(-mPosition-1,pageno,2,ff);}
             else if(pageno==1){
                 if (mPosition>=0)
-                    sct.onItemClick(mPosition,pageno,0);
+                    sct.onItemClick(mPosition,pageno,0,ff);
                 else
-                    sct.onItemClick(-mPosition-1,pageno,2);}
-            if(pageno==2){
+                    sct.onItemClick(-mPosition-1,pageno,2,ff);}
+            else if(pageno==2){
                 if (mPosition>=0)
-                    sct.onItemClick(mPosition,pageno,0);
+                    sct.onItemClick(mPosition,pageno,0,ff);
                 else
-                    sct.onItemClick(-mPosition-1,pageno,1);}
-            ff.test();
+                    sct.onItemClick(-mPosition-1,pageno,1,ff);}
         }
     }
 }

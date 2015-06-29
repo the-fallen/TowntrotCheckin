@@ -1,5 +1,6 @@
 package com.towntrot.checkin;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     ListView list;
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
-    private String[] eventtype={"BOOKED","CHECKED IN","CANCELLED"};
+    private String[] eventtype={"    BOOKED    ","    CHECKED IN    ","    CANCELLED    "};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,8 +89,8 @@ public class SlidingTabsBasicFragment extends Fragment {
         }
         return arr;
     }
-    public void test(){
-    mViewPager.getAdapter().notifyDataSetChanged();
+    public void update(){
+        mViewPager.getAdapter().notifyDataSetChanged();
     }
     public int getPageno(){
         return mViewPager.getCurrentItem();

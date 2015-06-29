@@ -1,19 +1,23 @@
-package com.towntrot.checkin;
+    package com.towntrot.checkin;
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.os.Build;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.HorizontalScrollView;
-import android.widget.TextView;
+    import android.content.Context;
+    import android.content.res.TypedArray;
+    import android.graphics.Color;
+    import android.graphics.Typeface;
+    import android.graphics.drawable.Drawable;
+    import android.os.Build;
+    import android.support.v4.view.PagerAdapter;
+    import android.support.v4.view.ViewPager;
+    import android.util.AttributeSet;
+    import android.util.TypedValue;
+    import android.view.Gravity;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.widget.HorizontalScrollView;
+    import android.widget.TextView;
+    import android.widget.Toast;
 
-public class SlidingTabLayout extends HorizontalScrollView {
+    public class SlidingTabLayout extends HorizontalScrollView {
 
     public interface TabColorizer {
 
@@ -23,7 +27,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     }
 
-    private static final int TITLE_OFFSET_DIPS = 24;
+    private static final int TITLE_OFFSET_DIPS = 10;
     private static final int TAB_VIEW_PADDING_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
@@ -70,6 +74,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     protected TextView createDefaultTabView(Context context) {
         TextView textView = new TextView(context);
         textView.setGravity(Gravity.CENTER);
+        textView.setTextColor(Color.parseColor("#ee7600"));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
 
@@ -79,8 +84,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
                     outValue, true);
             textView.setBackgroundResource(outValue.resourceId);
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+    
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             // If we're running on ICS or newer, enable all-caps to match the Action Bar tab style
             textView.setAllCaps(true);
         }
@@ -208,4 +213,4 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
-}
+    }
